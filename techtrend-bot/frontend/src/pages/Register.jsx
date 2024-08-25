@@ -14,6 +14,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
+    console.log('Sending registration data:', { username, email, password });
     e.preventDefault();
     try {
       await api.post('/auth/register', { username, email, password });
