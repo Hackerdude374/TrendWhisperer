@@ -1,16 +1,9 @@
-// frontend/src/pages/Profile.jsx
+// src/pages/Profile.jsx
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Typography, makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: theme.spacing(4),
-  },
-}));
+import { Container, Typography, Box } from '@mui/material';
 
 const Profile = () => {
-  const classes = useStyles();
   const user = useSelector((state) => state.auth.user);
 
   if (!user) {
@@ -18,16 +11,18 @@ const Profile = () => {
   }
 
   return (
-    <Container className={classes.container}>
+    <Container sx={{ marginTop: 4 }}>
       <Typography variant="h4" gutterBottom>
         User Profile
       </Typography>
-      <Typography variant="body1">
-        Username: {user.username}
-      </Typography>
-      <Typography variant="body1">
-        Email: {user.email}
-      </Typography>
+      <Box>
+        <Typography variant="body1">
+          Username: {user.username}
+        </Typography>
+        <Typography variant="body1">
+          Email: {user.email}
+        </Typography>
+      </Box>
     </Container>
   );
 };

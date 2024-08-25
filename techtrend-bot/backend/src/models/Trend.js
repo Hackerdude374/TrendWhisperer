@@ -10,3 +10,5 @@ const TrendSchema = new mongoose.Schema({
   relevanceScore: { type: Number, required: true },
   timestamp: { type: Date, default: Date.now }
 });
+
+module.exports = mongoose.model('Trend', TrendSchema);

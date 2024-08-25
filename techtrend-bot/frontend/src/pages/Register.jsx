@@ -1,31 +1,14 @@
-// frontend/src/pages/Register.jsx
+// src/pages/Register.jsx
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { Container, TextField, Button, Typography, makeStyles } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
+import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import api from '../services/api';
 import { login } from '../store/slices/authSlice';
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: theme.spacing(4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
 const Register = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,7 +19,7 @@ const Register = () => {
       await api.post('/auth/register', { username, email, password });
       const resultAction = await dispatch(login({ email, password }));
       if (login.fulfilled.match(resultAction)) {
-        history.push('/');
+        navigate('/');
       }
     } catch (error) {
       console.error('Registration failed:', error);
@@ -44,11 +27,11 @@ const Register = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs" className={classes.container}>
+    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
       <Typography component="h1" variant="h5">
         Register
       </Typography>
-      <form className={classes.form} onSubmit={handleSubmit}>
+      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
         <TextField
           variant="outlined"
           margin="normal"
@@ -92,11 +75,11 @@ const Register = () => {
           fullWidth
           variant="contained"
           color="primary"
-          className={classes.submit}
+          sx={{ mt: 3, mb: 2 }}
         >
           Register
         </Button>
-      </form>
+      </Box>
     </Container>
   );
 };

@@ -1,8 +1,7 @@
-// frontend/src/App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import ChatInterface from './pages/ChatInterface';
@@ -13,7 +12,7 @@ import Profile from './pages/Profile';
 
 const theme = createTheme({
   palette: {
-    type: 'dark',
+    mode: 'dark',
     primary: {
       main: '#3f51b5',
     },
@@ -29,14 +28,14 @@ function App() {
       <CssBaseline />
       <Router>
         <NavBar />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/chat" component={ChatInterface} />
-          <Route path="/trends" component={TrendDashboard} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/profile" component={Profile} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/chat" element={<ChatInterface />} />
+          <Route path="/trends" element={<TrendDashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
       </Router>
     </ThemeProvider>
   );
